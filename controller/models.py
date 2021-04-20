@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here
 
 # 单次模型训练的参数结果需要存储至数据库中，保存为一个result对象
-class test(models.Model):
+class Tests(models.Model):
     # 训练模型
     model_id = models.CharField(max_length=50, default='None')
     # 训练源域数据集
