@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,8 +14,8 @@
 </head>
     <body style="overflow-x:hidden">
     <div class="layui-layout layui-layout-admin site-demo-fixed">
-    <link rel="stylesheet" type="text/css" href="./layui/css/layui.css">  
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="{% static "layui/css/layui.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
   </head>
   <br>
     <div class="layui-header header header-demo" spring="">
@@ -60,9 +61,11 @@
     </br>
   </br>
         <div class="layui-form-item">
+            <form action={% url 'SELECT' %} method="post">
+                {% csrf_token %}
     <label class="layui-form-label">模型选择</label>
           <div class="layui-input-block">
-            <select name="city" lay-verify="required">
+            <select name="model" lay-verify="required">
               <option value=""></option>
               <option value="0">DSN</option>
             </select>
@@ -71,20 +74,20 @@
         </br>
           <label class="layui-form-label">源数据集</label>
           <div class="layui-input-block">
-            <select name="city" lay-verify="required">
+            <select name="source" lay-verify="required">
               <option value=""></option>
-              <option value="0">mnist</option>
-              <option value="1">mnist-m</option>
+              <option value="0">dataset1</option>
+              <option value="1">dataset2</option>
             </select>
           </div>
         </br>
         </br>
             <label class="layui-form-label">目标数据集</label>
           <div class="layui-input-block">
-            <select name="city" lay-verify="required">
+            <select name="target" lay-verify="required">
               <option value=""></option>
-              <option value="0">mnist</option>
-              <option value="1">mnist-m</option>
+              <option value="0">dataset1</option>
+              <option value="1">dataset2</option>
             </select>
           </div>
       </br>

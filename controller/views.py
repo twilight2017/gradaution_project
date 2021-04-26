@@ -13,13 +13,22 @@ import xlrd
 # Create your views here.
 
 def test(request):
-    if request.method == "POST" and request.POST:
-        s_id = request.POST.get('source_id')
-        t_id = request.POST.get('target_id')
-        # 创建新的测试对象，存入数据库中
-        info = Tests()
-        info.source_id = s_id
-        info.target_id = t_id
-        info.save()
-        return render(request, 'home.html')
     return render(request, 'home.html')
+
+def algorithm(request):
+    if request.method == "POST" and request.POST:
+        # 读取前端页面上传的数据
+        m_id = request.POST.get('model')
+        s_id = request.POST.get('source')
+        t_id = request.POST.get('target')
+        os.system('python D:\study\graduation_project\grdaution_project\instru_identify\train.py')
+        # 创建新的测试对象，存入数据库中
+        #info = Tests()
+        #info.model_id = m_id
+        #info.source_id = s_id
+        #info.target_id = t_id
+        #info.save()
+        print(m_id)
+
+        return render(request, 'home.html')
+    return render(request,'identify.html')
