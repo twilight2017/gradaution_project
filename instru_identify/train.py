@@ -4,6 +4,7 @@ import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data
 import numpy as np
+import sys
 from torch.autograd import Variable
 from torchvision import transforms
 from model_compat import DSN
@@ -35,7 +36,7 @@ if not os.path.exists(model_root):
 
 # 训练日志保存
 log_path = os.path.join(model_root, 'train.txt')
-# sys.stdout = Logger(log_path)
+sys.stdout = Logger(log_path)
 
 print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 

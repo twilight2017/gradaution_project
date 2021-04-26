@@ -2,7 +2,7 @@ import sys
 
 class Logger(object):
     def __init__(self,filename):
-        self.terminal = sys.stout
+        self.terminal = sys.stdout
         self.log = open(filename, "a")
 
     def write(self, message):

@@ -8,10 +8,10 @@ from model_compat import DSN
 import torchvision.utils as vutils
 
 # 全部数据训练一次称为一个epoch
-def test(epoch,name):
+def test(epoch, name):
     cuda = False
     cudnn.benchmark = True
-    batch_size = 2
+    batch_size = 4
     image_size = 28
     p = str(8)
     model_root = 'dataset1'+p+'dataset2'
@@ -22,7 +22,7 @@ def test(epoch,name):
     # 图形变换
     source_img_transform = transforms.Compose([
           transforms.Resize(image_size),
-          transforms.ToTensor(),  # 归一化,进行图像唉对灰度处理
+          transforms.ToTensor(),  # 归一化,进行图像的灰度处理
           transforms.Lambda(lambda x: x.repeat(3, 1, 1)),  # 单通道变为三通道
           transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
     ])
