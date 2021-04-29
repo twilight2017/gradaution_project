@@ -59,8 +59,8 @@ def test(epoch, name):
         # print('success')
     elif name == 'dataset2':
         mode = 'target'
-        image_root = os.path.join('dataset', 'dataset2', 'dataset2_test')
-        test_list = os.path.join('dataset', 'dataset2', 'dataset2_test_labels.txt')
+        image_root = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify', 'dataset', 'dataset2', 'dataset2_test')
+        test_list = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify', 'dataset', 'dataset2', 'dataset2_test_labels.txt')
         dataset = GetLoader(
             data_root=image_root,
             data_list=test_list,

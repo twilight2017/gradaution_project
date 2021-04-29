@@ -10,6 +10,7 @@ import xlwt
 from io import BytesIO
 import qrcode
 import xlrd
+import subprocess
 # Create your views here.
 
 def test(request):
@@ -21,14 +22,14 @@ def algorithm(request):
         m_id = request.POST.get('model')
         s_id = request.POST.get('source')
         t_id = request.POST.get('target')
-        os.system('python D:\study\graduation_project\grdaution_project\instru_identify\train.py')
+        os.system('D:\study\graduation_project\grdaution_project\instru_identify//train.exe')
         # 创建新的测试对象，存入数据库中
-        #info = Tests()
-        #info.model_id = m_id
-        #info.source_id = s_id
-        #info.target_id = t_id
-        #info.save()
+        # info = Tests()
+        # info.model_id = m_id
+        # info.source_id = s_id
+        # info.target_id = t_id
+        # info.save()
         print(m_id)
 
-        return render(request, 'home.html')
-    return render(request,'identify.html')
+        return render(request, 'identify.html')
+    return render(request, 'identify.html')
