@@ -45,7 +45,7 @@ def run():
     cuda = False
     cudnn.benchmark = True
     lr = 1e-2  # 学习率
-    batch_size = 4  # 一个batch中图片的数量
+    batch_size = 16  # 一个batch中图片的数量
     image_size = 28  # 输入图片的尺寸
     n_epoch = 100  # 全部数据训练一次称为一个epoch，n_epoch表示epoch的总次数
     step_decay_weight = 0.95  # 用于调整lr的参数
@@ -159,6 +159,8 @@ def run():
 
     current_step = 0
     # 开始训练
+    accu_total1 = 0  # 统计dataset1中的总准确率和
+    accu_total2 = 0  # 统计dataset2中的总准确率和
     for epoch in range(n_epoch):
 
         # 1.加载数据
@@ -313,12 +315,18 @@ def run():
                          target_diff.data.cpu().numpy(), target_mse.data.cpu().numpy(), target_simse.data.cpu().numpy()))
 
                 torch.save(my_net.state_dict(), model_root + '/dsn_epoch_' + str(epoch) + '.pth')  # 保存模型
-                test(epoch=epoch, name='dataset1')
-                test(epoch=epoch, name='dataset2')
+                accu1 = test(epoch=epoch, name='dataset1')
+                accu_total1 += accu1
+                accu2 = test(epoch=epoch, name='dataset2')
+                accu_total2 += accu2
                 print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
-            print('done')
-            print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
+            # 获取平均准确率做为训练性能的评价指标
+    average_accu1 = accu_total1 / n_epoch
+    average_accu2 = accu_total2 / n_epoch
+    print('average_accu1', float(average_accu1))
+    print('average_accu2', float(average_accu2))
+    print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ import torchvision.utils as vutils
 def test(epoch, name):
     cuda = False
     cudnn.benchmark = True
-    batch_size = 4
+    batch_size = 16
     image_size = 28
     p = str(8)
     model_root = 'dataset1'+p+'dataset2'
@@ -41,9 +41,9 @@ def test(epoch, name):
 
     if name == 'dataset1':
         mode = 'source'
-        image_root = r'E:\study\python\instru_identify\dataset\dataset1\dataset1_test'
+        image_root = r'D:\study\graduation_project\grdaution_project\instru_identify\dataset\dataset1\dataset1_test'
         # image_root.replace("\\",'/')
-        test_list = r'E:\study\python\instru_identify\dataset\dataset1\dataset1_test_labels.txt'
+        test_list = r'D:\study\graduation_project\grdaution_project\instru_identify\dataset\dataset1\dataset1_test_labels.txt'
 
         dataset = GetLoader(
             data_root=image_root,
@@ -79,7 +79,8 @@ def test(epoch, name):
     ###############
     # load model  #
     ###############
-
+    # print('image_root:', image_root)
+    # print('test_list:',test_list)
     my_net = DSN()
     checkpoint = torch.load(os.path.join(model_root, 'dsn_epoch_' + str(epoch) + '.pth'))
     my_net.load_state_dict(checkpoint)
@@ -99,18 +100,21 @@ def test(epoch, name):
 
     # print(dataloader)
     len_dataloader = len(dataloader)
-    # print(len_dataloader)
+    # print('len_dataloader:',len_dataloader)
     data_iter = iter(dataloader)  # 获取迭代器
+    # print('data_iter:',data_iter)
 
     i = 0
     n_total = 0
     n_correct = 0
 
+    total_accu = 0
     while i < len_dataloader-1:
         #print(i)
         data_input = data_iter.next()
+        #print('data_input:', data_input)
         img, label = data_input
-
+        # print('label:', label)
         batch_size = len(label)  # batch_size为一个batch中图片的数量
 
         input_img = torch.FloatTensor(batch_size, 3, image_size, image_size)
@@ -131,6 +135,7 @@ def test(epoch, name):
 
         result = my_net(input_data=inputv_img, mode='source', rec_scheme='share')
         pred = result[3].data.max(1, keepdim=True)[1]
+        # print('pred:',pred)
 
         result = my_net(input_data=inputv_img, mode=mode, rec_scheme='all')
         rec_img_all = tr_image(result[-1].data)
@@ -153,6 +158,11 @@ def test(epoch, name):
         n_total += batch_size
 
         i += 1
-
     accu = n_correct * 1.0/n_total
-    print('epoch: %d,accuracy of the %s dataset: %f' % (epoch, name, accu))
+
+    # print('n_correct:', n_correct)
+    # print('n_total:', n_total)
+    # print('epoch: %d,accuracy of the %s dataset: %f' % (epoch, name, accu))
+    return accu
+
+

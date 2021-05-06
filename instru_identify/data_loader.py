@@ -19,13 +19,13 @@ class GetLoader(data.Dataset):
 
         for data in data_list:
             self.img_paths.append(data[:-3])
-            self.img_labels.append(data[0])
+            self.img_labels.append(data[9])
 
     def __getitem__(self, item):
         img_paths, labels = self.img_paths[item], self.img_labels[item]
         #print(img_paths)
         imgs = Image.open(os.path.join(self.root, img_paths)).convert('RGB')
-        imgs = imgs.resize((28,28),Image.ANTIALIAS)
+        imgs = imgs.resize((28, 28), Image.ANTIALIAS)
 
         if self.transform is not None:
             imgs = self.transform(imgs)
