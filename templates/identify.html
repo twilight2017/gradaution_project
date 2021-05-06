@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
   </head>
   <br>
-    <div class="layui-header header header-demo">
+    <div class="layui-header header header-demo" spring="">
         <div class="layui-fluid">
           <p style="position: relative;top: 20%;color: white;font-size: 38px;letter-spacing: 5px;font-family: SimHei;">仪表数据持续迁移学习系统</p>
         </div>
@@ -52,24 +52,22 @@
         </div>
       </div>
       <!--页面主要布局设计-->>
-    <div class="right" >
-        <!--<div class="layui-form">-->
-
-      <div>
+    <div class="right">
+      <form class="layui-form" action="">
         <div class="table1_name">
           <p>请选择想要进行训练的模型和数据集</p>
       </div>
     </br>
     </br>
   </br>
-          <form method="post">
-              {% csrf_token %}
         <div class="layui-form-item">
+            <form action={% url 'SELECT' %} method="post">
+                {% csrf_token %}
     <label class="layui-form-label">模型选择</label>
           <div class="layui-input-block">
             <select name="model" lay-verify="required">
               <option value=""></option>
-              <option value="DSN">DSN</option>
+              <option value="0">DSN</option>
             </select>
           </div>
   </div>
@@ -78,8 +76,8 @@
           <div class="layui-input-block">
             <select name="source" lay-verify="required">
               <option value=""></option>
-              <option value="dataset1">dataset1</option>
-              <option value="dataset2">dataset2</option>
+              <option value="0">dataset1</option>
+              <option value="1">dataset2</option>
             </select>
           </div>
         </br>
@@ -88,8 +86,8 @@
           <div class="layui-input-block">
             <select name="target" lay-verify="required">
               <option value=""></option>
-              <option value="dataset1">dataset1</option>
-              <option value="dataset2">dataset2</option>
+              <option value="0">dataset1</option>
+              <option value="1">dataset2</option>
             </select>
           </div>
       </br>
@@ -139,7 +137,7 @@
     </div>
   </body>
   <!--2.引入JS文件-->
-  <script type="text/javascript"></script>
+  <script type="text/javascript" src="./layui/layui.js"></script>
   <script type="text/javascript">
 </script>
 </html>
