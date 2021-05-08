@@ -48,7 +48,7 @@ def run():
     lr = 1e-2  # 学习率
     batch_size = 16  # 一个batch中图片的数量
     image_size = 28  # 输入图片的尺寸
-    n_epoch = 100  # 全部数据训练一次称为一个epoch，n_epoch表示epoch的总次数
+    n_epoch = 1  # 全部数据训练一次称为一个epoch，n_epoch表示epoch的总次数
     step_decay_weight = 0.95  # 用于调整lr的参数
     lr_decay_step = 20000  # 用于调整lr的参数
     active_domain_loss_step = 10000  # 设置p的更新
@@ -326,11 +326,15 @@ def run():
                     print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
                 # 获取平均准确率做为训练性能的评价指标
-        average_accu1 = accu_total1 / n_epoch
-        average_accu2 = accu_total2 / n_epoch
-        print('average_accu1', float(average_accu1))
-        print('average_accu2', float(average_accu2))
-        print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
+    average_accu1 = accu_total1 / len_dataloader
+    average_accu2 = accu_total2 / len_dataloader
+    result = [float(average_accu1),float(average_accu2)]
+    print('average_accu1', float(average_accu1))
+    print('average_accu2', float(average_accu2))
+    print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
+    print('result:',result)
+    return result
 
-    if __name__ == '__main__':
-        run()
+
+if __name__ == '__main__':
+    run()
