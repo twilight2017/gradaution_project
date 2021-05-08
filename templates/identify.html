@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 </head>
@@ -18,15 +18,15 @@
     <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
   </head>
   <br>
-    <div class="layui-header header header-demo" spring="">
+    <div class="layui-header header header-demo">
         <div class="layui-fluid">
           <p style="position: relative;top: 20%;color: white;font-size: 38px;letter-spacing: 5px;font-family: SimHei;">仪表数据持续迁移学习系统</p>
         </div>
       </div>
       <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">     
+        <div class="layui-side-scroll">
     <ul class="layui-nav layui-nav-tree site-demo-nav">
-      
+
       <li class="layui-nav-item layui-nav-itemed">
         <a class="javascript:;" href="javascript:;">性能评价<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
@@ -46,38 +46,40 @@
           </dd>
         </dl>
       </li>
-      
+
       <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
     <span class="layui-nav-bar" style="top: 22.5px; height: 0px; opacity: 0;"></span></ul>
         </div>
       </div>
       <!--页面主要布局设计-->>
-    <div class="right">
-      <form class="layui-form" action="">
+    <div class="right" >
+        <!--<div class="layui-form">-->
+
+      <div>
         <div class="table1_name">
           <p>请选择想要进行训练的模型和数据集</p>
       </div>
     </br>
     </br>
   </br>
+          <form method="post">
         <div class="layui-form-item">
-            <form action={% url 'SELECT' %} method="post">
+            <form action="post">
                 {% csrf_token %}
     <label class="layui-form-label">模型选择</label>
           <div class="layui-input-block">
             <select name="model" lay-verify="required">
               <option value=""></option>
-              <option value="0">DSN</option>
+              <option value="DSN">DSN</option>
             </select>
           </div>
-  </div>
         </br>
           <label class="layui-form-label">源数据集</label>
           <div class="layui-input-block">
             <select name="source" lay-verify="required">
               <option value=""></option>
-              <option value="0">dataset1</option>
-              <option value="1">dataset2</option>
+              <option value="dataset1">dataset1</option>
+              <option value="dataset2">dataset2</option>
             </select>
           </div>
         </br>
@@ -86,8 +88,8 @@
           <div class="layui-input-block">
             <select name="target" lay-verify="required">
               <option value=""></option>
-              <option value="0">dataset1</option>
-              <option value="1">dataset2</option>
+              <option value="dataset1">dataset1</option>
+              <option value="dataset2">dataset2</option>
             </select>
           </div>
       </br>
@@ -137,7 +139,7 @@
     </div>
   </body>
   <!--2.引入JS文件-->
-  <script type="text/javascript" src="./layui/layui.js"></script>
+  <script type="text/javascript"></script>
   <script type="text/javascript">
 </script>
 </html>
