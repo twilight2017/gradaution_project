@@ -341,10 +341,11 @@ def run():
     average_accu1 = accu_total1 / len_dataloader
     average_accu2 = accu_total2 / len_dataloader
     # result = [float(average_accu1),float(average_accu2)]
-    print(float(average_accu1))
-    print(float(average_accu2))
-    print(float(time_total1))
-    print(float(time_total2))
+    # 所有数据均保留三位小数进行存储
+    print(round(float(average_accu1), 3))
+    print(round(float(average_accu2), 3))
+    print(round(float(time_total1), 3))
+    print(round(float(time_total2), 3))
     # print('result:',result)
     return result
 
