@@ -21,6 +21,7 @@ from generation.settings import FILES_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.test, name="SIGNAL"),
-    path('identify/', views.algorithm, name="SELECT")
+    path('', views.algorithm, name="SELECT"),
+    path('line/',views.line,name="LINE"),
+    path('bar/',views.bar,name="BAR")
 ]
