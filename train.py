@@ -40,7 +40,7 @@ def run():
     log_path = os.path.join(model_root, 'train.txt')
     sys.stdout = Logger(log_path)
 
-    print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    # print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
     # 训练参数定义
     cuda = False
@@ -120,8 +120,8 @@ def run():
         # Decay learning rate by a factor of step_decay_weight every lr_decay_step
         current_lr = init_lr * (step_decay_weight ** (step/lr_decay_step))
 
-        if step % lr_decay_step == 0:
-            print('learning rate is set to %f' % current_lr)
+        # if step % lr_decay_step == 0:
+            # print('learning rate is set to %f' % current_lr)
 
         for param_group in optimizer.param_groups:
             param_group['lr'] = current_lr
@@ -162,6 +162,8 @@ def run():
     # 开始训练
     accu_total1 = 0  # 统计dataset1中的总准确率和
     accu_total2 = 0  # 统计dataset2中的总准确率和
+    time_total1 = 0  # 统计dataset1训练的总时间
+    time_total2 = 0  # 统计dataset2训练的总时间
     for epoch in range(n_epoch):
 
         # 1.加载数据
@@ -310,29 +312,40 @@ def run():
                     ##############
                     i += 1
                     current_step += 1
-                    print('source_classification: %f, source_dann: %f, source_diff: %f, '\
-                          'source_mse: %f, source_simse: %f, target_dann: %f, target_diff: %f, '\
-                          'target_mse: %f, target_simse: %f' \
-                          % (source_classification.data.cpu().numpy(), source_dann.data.cpu().numpy(),
-                             source_diff.data.cpu().numpy(),
-                             source_mse.data.cpu().numpy(), source_simse.data.cpu().numpy(), target_dann.data.cpu().numpy(),
-                             target_diff.data.cpu().numpy(), target_mse.data.cpu().numpy(), target_simse.data.cpu().numpy()))
+                    # print('source_classification: %f, source_dann: %f, source_diff: %f, '\
+                          # 'source_mse: %f, source_simse: %f, target_dann: %f, target_diff: %f, '\
+                          # 'target_mse: %f, target_simse: %f' \
+                          # % (source_classification.data.cpu().numpy(), source_dann.data.cpu().numpy(),
+                          #   source_diff.data.cpu().numpy(),
+                          #   source_mse.data.cpu().numpy(), source_simse.data.cpu().numpy(), target_dann.data.cpu().numpy(),
+                          #   target_diff.data.cpu().numpy(), target_mse.data.cpu().numpy(), target_simse.data.cpu().numpy()))
 
                     torch.save(my_net.state_dict(), model_root + '/dsn_epoch_' + str(epoch) + '.pth')  # 保存模型
+                    # 训练数据集1并计算累积时间，和累积准确率
+                    start1 = time.time()
                     accu1 = test(epoch=epoch, name='dataset1')
+                    end1 = time.time()
+                    curr1 = end1-start1
+                    time_total1 += curr1
                     accu_total1 += accu1
+                    # 训练数据集2并计算累积时间，和累积准确率
+                    start2 = time.time()
                     accu2 = test(epoch=epoch, name='dataset2')
+                    end2 = time.time()
+                    curr2 = end2-start2
+                    time_total2 += curr2
                     accu_total2 += accu2
-                    print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
+                    # print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
                 # 获取平均准确率做为训练性能的评价指标
     average_accu1 = accu_total1 / len_dataloader
     average_accu2 = accu_total2 / len_dataloader
-    result = [float(average_accu1),float(average_accu2)]
-    print('average_accu1', float(average_accu1))
-    print('average_accu2', float(average_accu2))
-    print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
-    print('result:',result)
+    # result = [float(average_accu1),float(average_accu2)]
+    print(float(average_accu1))
+    print(float(average_accu2))
+    print(float(time_total1))
+    print(float(time_total2))
+    # print('result:',result)
     return result
 
 
