@@ -117,25 +117,25 @@
               <th width="10">训练模型号</th>
               <th width="10">数据集</th>
               <th width="10">识别准确率</th>
-              <th width="10">训练时长</th>
+              <th width="10">训练时长(s)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>DDS6066</td>
-              <td>MNIST</td>
-              <td>99.8%</td>
-              <td>1.1s</td>
+              <td>{{ test_list.model_id }}</td>
+              <td>{{ test_list.source_id }}</td>
+              <td>{{ test_list.source_acc}}</td>
+              <td>{{ test_list.source_time }}</td>
             </tr>
             <tr>
-              <td>DDS6067</td>
-              <td>MNIST</td>
-              <td>97.1%</td>
-              <td>0.9s</td>
+              <td>{{ test_list.model_id }}</td>
+              <td>{{ test_list.target_id }}</td>
+              <td>{{ test_list.target_acc}}</td>
+              <td>{{ test_list.target_time }}</td>
             </tr>
           </tbody>
         </table>
-    </div>
+    <!--</div>-->
     </div>
   </body>
   <!--2.引入JS文件-->
