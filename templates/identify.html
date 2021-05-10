@@ -28,21 +28,21 @@
     <ul class="layui-nav layui-nav-tree site-demo-nav">
 
       <li class="layui-nav-item layui-nav-itemed">
-        <a class="javascript:;" href="javascript:;">性能评价<span class="layui-nav-more"></span></a>
+        <a class="javascript:;" href="javascript:;">模型训练<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
           <dd>
             <a>数据及模型选择</a>
           </dd>
-          <dd>
-            <a>模型性能评价</a>
-          </dd>
         </dl>
       </li>
       <li class="layui-nav-item layui-nav-itemed">
-        <a class="javascript:;" href="javascript:;">图片识别<span class="layui-nav-more"></span></a>
+        <a class="javascript:;" href="javascript:;">性能评价<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
+            <dd class="">
+            <a href = {% url 'LINE' %}>训练准确率折线分析图</a>
+          </dd>
           <dd class="">
-            <a>仪表图片识别</a>
+            <a href = {% url 'BAR' %}>训练时长柱状分析图</a>
           </dd>
         </dl>
       </li>
