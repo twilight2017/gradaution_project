@@ -52,7 +52,7 @@ def run():
     lr = 1e-2
     batch_size = 16
     image_size = 28
-    n_epoch = 100
+    n_epoch = 1
     step_decay_weight = 0.95
     lr_decay_step = 20000
     active_domain_loss_step = 10000
@@ -330,8 +330,6 @@ def run():
                     #   source_diff.data.cpu().numpy(),
                     #   source_mse.data.cpu().numpy(), source_simse.data.cpu().numpy(), target_dann.data.cpu().numpy(),
                     #   target_diff.data.cpu().numpy(), target_mse.data.cpu().numpy(), target_simse.data.cpu().numpy()))
-
-                    torch.save(my_net.state_dict(), model_root + '/dsn_epoch_' + str(epoch) + '.pth')  # 保存模型
                     # 训练数据集1并计算累积时间，和累积准确率
                     start1 = time.time()
                     accu1 = test(epoch=epoch, name='dataset1')
@@ -349,8 +347,17 @@ def run():
                     # print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
                 # 获取平均准确率做为训练性能的评价指标
-    average_accu1 = accu_total1 / len_dataloader
-    average_accu2 = accu_total2 / len_dataloader
+    model_index = epoch
+    # 获取模型保存路径
+    model_path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2' + '\dsn_epoch_' + str(
+        model_index) + '.pth'
+    while os.path.exists(model_path):
+        model_index = model_index + 1
+        model_path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2' + '\dsn_epoch_' + str(
+            model_index) + '.pth'
+    torch.save(my_net.state_dict(), model_path)  # 保存模型
+    average_accu1 = accu_total1 / (len_dataloader * n_epoch)
+    average_accu2 = accu_total2 / (len_dataloader * n_epoch)
     # result = [float(average_accu1),float(average_accu2)]
     # 所有数据均保留三位小数进行存储
     print(round(float(average_accu1), 3))
