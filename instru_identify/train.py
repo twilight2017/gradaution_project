@@ -338,8 +338,8 @@ def run():
                     # print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
                 # 获取平均准确率做为训练性能的评价指标
-    average_accu1 = accu_total1 / len_dataloader
-    average_accu2 = accu_total2 / len_dataloader
+    average_accu1 = accu_total1 / (len_dataloader * n_epoch)
+    average_accu2 = accu_total2 / (len_dataloader * n_epoch)
     # result = [float(average_accu1),float(average_accu2)]
     # 所有数据均保留三位小数进行存储
     print(round(float(average_accu1), 3))
