@@ -23,11 +23,20 @@ def algorithm(request):
         m_id = request.POST.get('model')
         s_id = request.POST.get('source')
         t_id = request.POST.get('target')
-        outfile = open('test.txt', 'w')  # same with "w" or "a" as opening mode
-        res = subprocess.Popen('python D:\study\graduation_project\grdaution_project\instru_identify\\train.py',stdout=outfile)
-        res.communicate()
-        file = open('D:\study\graduation_project\grdaution_project\\test.txt',encoding='utf-8')
-        # 按行读取运行结果文件，并存入数组中进行保存
+        #判断调用的模型是DSN模型还是上次迁移学习结果的模型
+        if m_id == 'DSN':
+            outfile = open('test.txt', 'w')  # same with "w" or "a" as opening mode
+            res = subprocess.Popen('python D:\study\graduation_project\grdaution_project\instru_identify\\train.py',stdout=outfile)
+            res.communicate()
+            file = open('D:\study\graduation_project\grdaution_project\\test.txt',encoding='utf-8')
+            # 按行读取运行结果文件，并存入数组中进行保存
+        else:
+            outfile = open('test.txt', 'w')  # same with "w" or "a" as opening mode
+            res = subprocess.Popen('python D:\study\graduation_project\grdaution_project\instru_identify\\train_l.py',
+                                   stdout=outfile)
+            res.communicate()
+            file = open('D:\study\graduation_project\grdaution_project\\test.txt', encoding='utf-8')
+            # 按行读取运行结果文件，并存入数组中进行保存
         dit, i= {}, 1
         for line in file:
             line = line.strip('\n')
