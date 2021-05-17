@@ -62,33 +62,33 @@
     </br>
     </br>
   </br>
-          <form method="post">
+          <!--<form method="post">-->
         <div class="layui-form-item">
-            <form action="post">
+            <form class="layui-form" method="post">
                 {% csrf_token %}
-    <label class="layui-form-label">模型选择</label>
+        <label class="layui-form-label">模型选择</label>
           <div class="layui-input-block">
             <select name="model" lay-verify="required">
-              <option value=""></option>
+              <option value="">请选择训练模型</option>
               <option value="DSN">DSN</option>
               <option value="Last transfer learning model">上次迁移结果模型</option>
             </select>
           </div>
         </br>
-          <label class="layui-form-label">源数据集</label>
+       <label class="layui-form-label">源数据集</label>
           <div class="layui-input-block">
             <select name="source" lay-verify="required">
-              <option value=""></option>
+              <option value="">请选择源域数据集</option>
               <option value="单相电子式电能表">单相电子式电能表</option>
               <option value="电子式电流表">电子式电流表</option>
             </select>
           </div>
         </br>
         </br>
-            <label class="layui-form-label">目标数据集</label>
+        <label class="layui-form-label">目标数据集</label>
           <div class="layui-input-block">
             <select name="target" lay-verify="required">
-              <option value=""></option>
+              <option value="">请选择目标域数据集</option>
               <option value="单相电子式电能表">单相电子式电能表</option>
               <option value="电子式电流表">电子式电流表</option>
             </select>
@@ -97,7 +97,7 @@
     </br>
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">开始迁移学习</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo" style="position: center;">开始迁移学习</button>
           </div>
         </div>
       </form>
@@ -140,7 +140,10 @@
     </div>
   </body>
   <!--2.引入JS文件-->
-  <script type="text/javascript"></script>
-  <script type="text/javascript">
+  <script src="../static/layui/layui.js" type="text/javascript">
+      layui.use('form', function () {
+          var form = layui.form;
+          form.render();
+      })
 </script>
 </html>
