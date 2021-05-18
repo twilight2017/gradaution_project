@@ -71,7 +71,9 @@
             <select name="model" lay-verify="required">
               <option value="">请选择训练模型</option>
               <option value="DSN">DSN</option>
-              <option value="Last transfer learning model">上次迁移结果模型</option>
+                {% for se in display_list %}
+              <option value="{{ se }}">{{ se }}</option>
+                {% endfor %}
             </select>
           </div>
         </br>
