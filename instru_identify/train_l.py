@@ -24,7 +24,7 @@ import time
 def run(net_str):
     # execute only if run as the entry point into the program
     # 定义源域和当前目标域
-    net_str = 'dataset18dataset2/' + net_str
+    net_str = os.path.join('D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2', net_str)
     source_image_root = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify',
                                      'dataset', 'dataset1')
     target_image_root = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify',
@@ -370,5 +370,6 @@ def run(net_str):
 
 
 if __name__ == '__main__':
-    nett_str = input()
+    nett_str = sys.argv[1]
+    #print(nett_str)
     run(nett_str)
