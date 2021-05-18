@@ -337,7 +337,16 @@ def run():
                     accu_total2 += accu2
                     # print(time.strftime('%Y-%m-%d %H:%M:%S'), time.localtime(time.time()))
 
-                # 获取平均准确率做为训练性能的评价指标
+    # 获取平均准确率做为训练性能的评价指标
+    model_index = epoch
+    # 获取模型保存路径
+    model_path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2' + '\dsn_epoch_' + str(
+        model_index) + '.pth'
+    while os.path.exists(model_path):
+        model_index = model_index + 1
+        model_path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2' + '\dsn_epoch_' + str(
+            model_index) + '.pth'
+    torch.save(my_net.state_dict(), model_path)  # 保存模型
     average_accu1 = accu_total1 / (len_dataloader * n_epoch)
     average_accu2 = accu_total2 / (len_dataloader * n_epoch)
     # result = [float(average_accu1),float(average_accu2)]
