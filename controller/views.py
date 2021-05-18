@@ -32,8 +32,9 @@ def algorithm(request):
             # 按行读取运行结果文件，并存入数组中进行保存
         else:
             outfile = open('test.txt', 'w')  # same with "w" or "a" as opening mode
-            res = subprocess.Popen('python D:\study\graduation_project\grdaution_project\instru_identify\\train_l.py',
-                                   stdout=outfile)
+            com_str = 'python D:\study\graduation_project\grdaution_project\instru_identify\\train_l.py'
+            com_str = com_str + ' ' + m_id
+            res = subprocess.Popen(com_str, stdout=outfile)
             res.communicate()
             file = open('D:\study\graduation_project\grdaution_project\\test.txt', encoding='utf-8')
             # 按行读取运行结果文件，并存入数组中进行保存
@@ -56,20 +57,23 @@ def algorithm(request):
         info.save()
         # 列表存储返回前端的结果
         # 获取展示队列
-        display = Tests.objects.get(target_acc=dit[2])
-        return render(request, 'identify.html',{'test_list':display})
-    else:
+        display = Tests.objects.get(target_time=dit[4])
         path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2'
         name = os.listdir(path)
-        print(name)
         LIST = []
         for i in name:
             LIST.append(i)
-        return render(request, 'identify.html',{'display_list':LIST})
+        return render(request, 'identify.html', {'test_list': display, 'display_list': LIST})
+    else:
+        path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2'
+        name = os.listdir(path)
+        LIST = []
+        for i in name:
+            LIST.append(i)
+        return render(request, 'identify.html', {'display_list':LIST})
 
 
 def line(request):
-    print('line_success')
     # 获取当前数据库中所有tests()对象
     dis = Tests.objects.filter()
     LIST = []
