@@ -21,9 +21,10 @@ import time
 ######################
 # params             #
 ######################
-def run():
+def run(net_str):
     # execute only if run as the entry point into the program
     # 定义源域和当前目标域
+    net_str = 'dataset18dataset2/' + net_str
     source_image_root = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify',
                                      'dataset', 'dataset1')
     target_image_root = os.path.join('D:\\', 'study', 'graduation_project', 'grdaution_project', 'instru_identify',
@@ -118,7 +119,7 @@ def run():
     #####################
 
     my_net = DSN()
-    my_net.load_state_dict(torch.load("dataset18dataset2/dsn_epoch_0.pth"))
+    my_net.load_state_dict(torch.load(net_str))
 
     #####################
     # setup optimizer   #
@@ -369,4 +370,5 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    nett_str = input()
+    run(nett_str)
