@@ -58,7 +58,15 @@ def algorithm(request):
         # 获取展示队列
         display = Tests.objects.get(target_acc=dit[2])
         return render(request, 'identify.html',{'test_list':display})
-    return render(request,'identify.html')
+    else:
+        path = 'D:\study\graduation_project\grdaution_project\instru_identify\dataset18dataset2'
+        name = os.listdir(path)
+        print(name)
+        LIST = []
+        for i in name:
+            LIST.append(i)
+        return render(request, 'identify.html',{'display_list':LIST})
+
 
 def line(request):
     print('line_success')
